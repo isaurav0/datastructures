@@ -1,3 +1,5 @@
+import random
+
 class Node:
     def __init__(self, val):
         self.value = val
@@ -59,7 +61,20 @@ class Node:
             print(self.value)
             if(self.rightChild):
                 self.rightChild.inorder()
-        
+
+    def getLevel(self, data, level):
+        if(self.value==data):
+            return level
+        elif(self.value>data):
+            if(self.leftChild):
+                return self.leftChild.getLevel(data, level+1)
+            else:
+                return 'Element not found'
+        else:
+            if(self.rightChild):
+                return self.rightChild.getLevel(data, level+1)
+            else:
+                return 'Element not found'
 
     
 
@@ -98,19 +113,26 @@ class Tree:
         else:
             return False
 
+    def getLevel(self, data):
+        if(self.root):
+            return self.root.getLevel(data,1)
+        else:
+            return 'Empty Tree'
+
 
 tree1 = Tree()
-tree1.insert(70)
-tree1.insert(1)
-tree1.insert(10)
-tree1.insert(3)
-tree1.insert(9)
-tree1.insert(10)
-tree1.insert(50)
-tree1.insert(4)
+for i in range(1,20):
+    tree1.insert(random.randint(1,100))
+
+
 print("Preorder traversal is: ")
 tree1.preorder()
 print("Postorder traversal is: ")
 tree1.postorder()
 print("Inorder traversal is: ")
 tree1.inorder()
+
+data = 33
+print('level of %d is: '%data)
+print(tree1.getLevel(data))
+# tree1.getLevel(1)
