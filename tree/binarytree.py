@@ -76,6 +76,16 @@ class Node:
             else:
                 return 'Element not found'
 
+    def printTree(self, root):
+        if(self):
+            print("   "*root.getLevel(self.value,1),"", self.value)
+
+            if(self.leftChild):
+                self.leftChild.printTree(root)
+            if(self.rightChild):
+                self.rightChild.printTree(root)
+            
+
     
 
 class Tree:
@@ -119,20 +129,28 @@ class Tree:
         else:
             return 'Empty Tree'
 
+    def printTree(self):
+        return self.root.printTree(self.root)
+
 
 tree1 = Tree()
-for i in range(1,20):
+for i in range(1,50):
     tree1.insert(random.randint(1,100))
 
+# values = [5,3,6,1,0,2,8,7]
+# for value in values:
+#     tree1.insert(value)
 
-print("Preorder traversal is: ")
-tree1.preorder()
-print("Postorder traversal is: ")
-tree1.postorder()
-print("Inorder traversal is: ")
-tree1.inorder()
 
-data = 33
-print('level of %d is: '%data)
-print(tree1.getLevel(data))
-# tree1.getLevel(1)
+# print("Preorder traversal is: ")
+# tree1.preorder()
+# print("Postorder traversal is: ")
+# tree1.postorder()
+# print("Inorder traversal is: ")
+# tree1.inorder()
+
+# data = 33
+# print('level of %d is: '%data)
+# print(tree1.getLevel(data))
+
+tree1.printTree()
