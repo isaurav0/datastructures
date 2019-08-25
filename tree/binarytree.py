@@ -79,7 +79,6 @@ class Node:
     def printTree(self, root):
         if(self):
             print("   "*root.getLevel(self.value,1),"", self.value)
-
             if(self.leftChild):
                 self.leftChild.printTree(root)
             if(self.rightChild):
