@@ -39,12 +39,3 @@ class linkedList:
             else:
                 break
 
-
-list1 = linkedList()
-list1.insert(5)
-list1.insert(10)
-list1.insert(15)
-list1.insert(20)
-list1.insert(25)
-list1.insert(35)
-list1.traverse()
