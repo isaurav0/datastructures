@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "binarytree.C": "cpp"
+        "*.html": "html",
+        "binarytree.C": "cpp",
+        "bintree.C": "cpp",
+        "main.C": "cpp"
     }
 }
