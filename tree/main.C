@@ -22,7 +22,7 @@ class Node{
 		}
 
 		bool addNode(Node* node){
-			
+
 			if(node->value < this->value){
 				if(this->left != NULL){
 					this->left->addNode(node);
@@ -44,8 +44,15 @@ class Node{
 			}
 			if(node->value == this->value)
 				return false;
-
 		}		
+
+		void inorder(){
+			if(this->left)
+				this->left->inorder();
+			cout<< this->value <<endl;
+			if(this->right)
+				this->right->inorder();
+		}
 };
 
 class Tree{
@@ -63,6 +70,10 @@ class Tree{
 			else
 				return this->root->addNode(node);
 		}
+
+		void inorder(){
+			this->root->inorder();
+		}
 };
 
 
@@ -77,6 +88,8 @@ int main(){
 	tree.addValue(5);
 	tree.addValue(30);
 	tree.addValue(57);
+
+	tree.inorder();
 	
 	return 0;
 
