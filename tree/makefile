@@ -1,2 +1,2 @@
 all:
-	g++ *.C *.h
+	g++ main.C

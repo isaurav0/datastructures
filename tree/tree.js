@@ -17,6 +17,7 @@ function setup(){
     // tree.addValue(9)
     console.log(tree);
     tree.path();
+    tree.search(1);
 }
 
 function Tree(){
@@ -47,6 +48,14 @@ Tree.prototype.path = function(){
     length = 0
     return this.root.path(visitedPath, length)
     // console.log(this.root)
+}
+
+Tree.prototype.search = function(val){
+    if(this.root == val){
+        console.log("found")
+    }
+    else
+        return this.root.search(val)
 }
 
 
@@ -103,7 +112,6 @@ function Node(val){
 
         visitedPath[length] = this.value
         length++;
-
         
         if(this.left == null && this.right == null)
             console.log(visitedPath.slice(0,length))
@@ -112,6 +120,26 @@ function Node(val){
         if(this.right){            
             this.right.path(visitedPath, length)
         }
+    }
+
+    this.search =function(val) {
+
+        if(val==this.value)
+            return console.log("found")
+        else if(val>this.value){
+            if(this.right)
+                this.right.search(val)
+            else
+                return console.log("not found in right")
+        }
+        else if(val<this.value){
+            if(this.left)
+                this.left.search(val)
+            else 
+                return console.log("not found in left ")
+        }
+        else
+            return console.log(this.value, val)
     }
 }
 
