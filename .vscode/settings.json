@@ -4,6 +4,7 @@
         "bintree.C": "cpp",
         "main.C": "cpp",
         "iostream": "cpp",
-        "stack.C": "cpp"
+        "stack.C": "cpp",
+        "circularQueue.C": "cpp"
     }
 }
