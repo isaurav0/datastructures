@@ -32,23 +32,43 @@ function Tree(){
             console.log("found")
         }
         else
-            return this.root.search(val)
+            return this.root.search(val, 0)
     }
 
     this.bfs = function () {
-        this.breadthResult = []
-        queue = new Queue()
-        queue.enqueue(this.root)        
+        queue = new Queue()        
+        breadthResult = []
+        info = {}    
+        level = 0          
+        queue.enqueue(this.root)
+        info['data'] = queue.getFront().value
+        info['level'] = level
+        // console.log(info)
+        breadthResult.push({'data': queue.getFront().value, 'level': level})
+
         while(!queue.isEmpty()){
             current = queue.getFront()
+            level += 1
             // console.log(queue.queue.length)
-            console.log(current.value)
-            if(current.left)
+            // console.log(current.value)                        
+            if(current.left){
+                info['data'] = current.left.value
+                info['level'] = level
                 queue.enqueue(current.left)
-            if(current.right)
+                // console.log(info)
+                breadthResult.push({'data': current.left.value, 'level': level})
+            }            
+            if(current.right){
+                info['data'] = current.right.value
+                info['level'] = level
                 queue.enqueue(current.right)
-            queue.dequeue()
-        }
+                // console.log(info)
+                breadthResult.push({'data': current.right.value, 'level': level})
+            }            
+            queue.dequeue()                                     
+        }     
+        console.log(breadthResult)   
+        return breadthResult
     }
 
 }
@@ -117,19 +137,19 @@ function Node(val){
         }
     }
 
-    this.search =function(val) {
+    this.search =function(val, level) {
 
         if(val==this.value)
-            return console.log("found")
+            return console.log("found at level: ", level)
         else if(val>this.value){
             if(this.right)
-                this.right.search(val)
+                this.right.search(val, level+1)
             else
                 return console.log("not found in right")
         }
         else if(val<this.value){
             if(this.left)
-                this.left.search(val)
+                this.left.search(val, level+1)
             else 
                 return console.log("not found in left ")
         }
@@ -139,9 +159,6 @@ function Node(val){
 
 }
 
-Node.prototype.bfs = function () {
-    console.log("muji")
-}
 
 
 function Queue(){
@@ -171,14 +188,18 @@ function Queue(){
 function setup(){
     // noCanvas();
     tree = new Tree();
+    tree.addValue(10);
+    tree.addValue(15);
     tree.addValue(5);
+    
     tree.addValue(3);
-    tree.addValue(6);
     tree.addValue(2);
-    tree.addValue(4);
+    tree.addValue(17);
+    tree.addValue(16);
+    // tree.addValue(0);
     console.log(tree);
     // tree.pathToLeaves();
-    // tree.search(1);
+    tree.search(4);
     tree.bfs();
 }
 
