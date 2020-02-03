@@ -1,61 +1,56 @@
-var tree;
-
-function setup(){
-    // noCanvas();
-    tree = new Tree();
-    // for(i=1;i<=5;i++){
-    //     tree.addValue(Math.floor(Math.random()*10))
-    //     // tree.addValue(i)
-    // }
-    // tree.inorder();
-    tree.addValue(5);
-    tree.addValue(3);
-    tree.addValue(6);
-    tree.addValue(2);
-    tree.addValue(4);
-    // tree.addValue(8)
-    // tree.addValue(9)
-    console.log(tree);
-    tree.path();
-    tree.search(1);
-}
-
 function Tree(){
     this.root = null;
-}
 
-Tree.prototype.addValue = function(val){
-    var n = new Node(val);            
-    if(this.root == null){
-        this.root = n
+    this.addValue = function(val){
+        var n = new Node(val);            
+        if(this.root == null){
+            this.root = n
+        }
+        else{
+            this.root.addNode(n);
+        }
     }
-    else{
-        this.root.addNode(n);
+
+    this.traverse = function(){
+        return this.root.visit()
     }
-}
 
-Tree.prototype.traverse = function(){
-    return this.root.visit()
-}
-
-Tree.prototype.inorder = function(){
-    return this.root.inorder()
-}
-
-Tree.prototype.path = function(){
-    // console.log('here')
-    visitedPath = []
-    length = 0
-    return this.root.path(visitedPath, length)
-    // console.log(this.root)
-}
-
-Tree.prototype.search = function(val){
-    if(this.root == val){
-        console.log("found")
+    this.inorder = function(){
+        return this.root.inorder()
     }
-    else
-        return this.root.search(val)
+
+    this.pathToLeaves = function(){
+        // console.log('here')
+        visitedPath = []
+        length = 0
+        return this.root.path(visitedPath, length)
+        // console.log(this.root)
+    }
+
+    this.search = function(val){
+        if(this.root == val){
+            console.log("found")
+        }
+        else
+            return this.root.search(val)
+    }
+
+    this.bfs = function () {
+        this.breadthResult = []
+        queue = new Queue()
+        queue.enqueue(this.root)        
+        while(!queue.isEmpty()){
+            current = queue.getFront()
+            // console.log(queue.queue.length)
+            console.log(current.value)
+            if(current.left)
+                queue.enqueue(current.left)
+            if(current.right)
+                queue.enqueue(current.right)
+            queue.dequeue()
+        }
+    }
+
 }
 
 
@@ -141,7 +136,51 @@ function Node(val){
         else
             return console.log(this.value, val)
     }
+
+}
+
+Node.prototype.bfs = function () {
+    console.log("muji")
 }
 
 
+function Queue(){
+    this.queue = []
+
+    this.enqueue = function(val) {
+        this.queue.push(val)
+    }
+
+    this.dequeue = function() {
+        this.queue = this.queue.slice(1,)
+    }
+
+    this.getFront = function () {
+        return this.queue[0]
+    }
+
+    this.isEmpty = function () {
+        if(this.queue.length == 0)
+            return true
+        else  
+            return false
+    }
+
+}
+
+function setup(){
+    // noCanvas();
+    tree = new Tree();
+    tree.addValue(5);
+    tree.addValue(3);
+    tree.addValue(6);
+    tree.addValue(2);
+    tree.addValue(4);
+    console.log(tree);
+    // tree.pathToLeaves();
+    // tree.search(1);
+    tree.bfs();
+}
+
+var tree;
 setup();

@@ -17,11 +17,11 @@ class Queue{
                 return ;
             }
             else{
-                this->rear++;
+                this->rear = (this->rear+1)%SIZE;
                 this->line[this->rear]=value;
                 if(this->front == -1){
                     front=0;
-                }   
+                }
                 // cout<<"success"<<endl;
             }
             // cout<<"value of rear upon inserting "<<value<<": "<<this->rear<<endl;
@@ -45,8 +45,8 @@ class Queue{
         }
 
         void print(void){
-            cout<<"front: "<<this->front<<endl;
-            cout<<"rear: "<<this->rear<<endl;
+            // cout<<"front: "<<this->front<<endl;
+            // cout<<"rear: "<<this->rear<<endl;
             if(this->front==-1){
                 cout<<"Queue Empty"<<endl;
             }
@@ -65,6 +65,7 @@ int main(){
     queue.enqueue(3);
     queue.enqueue(4);
     queue.enqueue(5);
+    queue.print();
     queue.dequeue();
     // queue.dequeue();
     // queue.dequeue();

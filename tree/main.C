@@ -88,7 +88,6 @@ int main(){
 	tree.addValue(5);
 	tree.addValue(30);
 	tree.addValue(57);
-
 	tree.inorder();
 	
 	return 0;
