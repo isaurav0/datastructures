@@ -12,7 +12,7 @@ class Queue{
 
         void enqueue(int value){
             
-            if(this->rear >= SIZE-1){
+            if((this->front+this->rear)){
                 cout<<"Queue Overflow"<<endl;
                 return ;
             }
@@ -21,10 +21,9 @@ class Queue{
                 this->line[this->rear]=value;
                 if(this->front == -1){
                     front=0;
-                }
-                // cout<<"success"<<endl;
+                }                             
             }
-            // cout<<"value of rear upon inserting "<<value<<": "<<this->rear<<endl;
+
         }
 
         void dequeue(void){
@@ -45,8 +44,7 @@ class Queue{
         }
 
         void print(void){
-            // cout<<"front: "<<this->front<<endl;
-            // cout<<"rear: "<<this->rear<<endl;
+    
             if(this->front==-1){
                 cout<<"Queue Empty"<<endl;
             }
@@ -59,6 +57,7 @@ class Queue{
 };
 
 int main(){
+    
     Queue queue = Queue();
     queue.enqueue(1);
     queue.enqueue(2);
@@ -67,11 +66,8 @@ int main(){
     queue.enqueue(5);
     queue.print();
     queue.dequeue();
-    // queue.dequeue();
-    // queue.dequeue();
     queue.enqueue(6);
-    // queue.enqueue(7);
-
     queue.print();
+
     return 0;
 }

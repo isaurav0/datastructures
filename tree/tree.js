@@ -36,39 +36,36 @@ function Tree(){
     }
 
     this.bfs = function () {
-        queue = new Queue()        
-        breadthResult = []
+        queue = new Queue()
         info = {}    
         level = 0          
         queue.enqueue(this.root)
-        info['data'] = queue.getFront().value
-        info['level'] = level
+        info[queue.getFront().value] = level        
+
         // console.log(info)
-        breadthResult.push({'data': queue.getFront().value, 'level': level})
+        // breadthResult.push({'data': queue.getFront().value, 'level': level})
 
         while(!queue.isEmpty()){
             current = queue.getFront()
-            level += 1
+            toPrint = ''
             // console.log(queue.queue.length)
-            // console.log(current.value)                        
+            console.log(current.value)                        
             if(current.left){
-                info['data'] = current.left.value
-                info['level'] = level
+                info[current.left.value] = info[current.value]+1
                 queue.enqueue(current.left)
                 // console.log(info)
-                breadthResult.push({'data': current.left.value, 'level': level})
+                // breadthResult.push({'data': current.left.value, 'level': level})
             }            
             if(current.right){
-                info['data'] = current.right.value
-                info['level'] = level
+                info[current.right.value] = info[current.value]+1
                 queue.enqueue(current.right)
                 // console.log(info)
-                breadthResult.push({'data': current.right.value, 'level': level})
+                // breadthResult.push({'data': current.right.value, 'level': level})
             }            
             queue.dequeue()                                     
         }     
-        console.log(breadthResult)   
-        return breadthResult
+        console.log(info)
+        return info
     }
 
 }
@@ -190,8 +187,7 @@ function setup(){
     tree = new Tree();
     tree.addValue(10);
     tree.addValue(15);
-    tree.addValue(5);
-    
+    tree.addValue(5);    
     tree.addValue(3);
     tree.addValue(2);
     tree.addValue(17);
